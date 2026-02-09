@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 const StudioPage = () => {
     return (
         <>
-            <div className="pt-24"> {/* Spacing for fixed navbar */}
+            <div className="pt-16"> {/* Reduced spacing for fixed navbar */}
                 <Studio />
             </div>
             <Footer />

@@ -24,13 +24,13 @@ const Navbar = () => {
     ];
 
     // Determine text color based on scroll and page
-    const textColor = isHome && !isScrolled ? 'text-white' : 'text-foreground';
+    const textColor = isHome && !isScrolled && !isMobileMenuOpen ? 'text-white' : 'text-foreground';
 
     return (
         <nav
-            className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled || !isHome
-                    ? 'bg-white/95 backdrop-blur-md shadow-sm py-4'
-                    : 'bg-transparent py-6'
+            className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled || !isHome || isMobileMenuOpen
+                ? 'bg-white/95 backdrop-blur-md shadow-sm py-4'
+                : 'bg-transparent py-6'
                 }`}
         >
             <div className="container mx-auto px-6 flex justify-between items-center">
@@ -59,21 +59,21 @@ const Navbar = () => {
                     {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
                 </button>
 
-                {/* Mobile Menu Overlay */}
+                {/* Mobile Menu Dropdown */}
                 <AnimatePresence>
                     {isMobileMenuOpen && (
                         <motion.div
-                            initial={{ opacity: 0, y: -20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -20 }}
-                            className="fixed inset-0 bg-white flex flex-col items-center justify-center space-y-8 md:hidden"
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: 'auto', opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            className="absolute top-full left-0 w-full bg-white border-t border-gray-100 flex flex-col items-center py-10 space-y-6 md:hidden overflow-hidden shadow-xl"
                         >
                             {navLinks.map((link) => (
                                 <Link
                                     key={link.name}
                                     to={link.href}
                                     onClick={() => setIsMobileMenuOpen(false)}
-                                    className="text-2xl font-light uppercase tracking-widest hover:text-gray-500 transition-colors text-foreground"
+                                    className="text-xl font-light uppercase tracking-widest hover:text-gray-500 transition-colors text-foreground"
                                 >
                                     {link.name}
                                 </Link>

@@ -3,28 +3,9 @@ import { motion } from 'framer-motion';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-const featuredProjects = [
-    {
-        id: 1,
-        title: "Casa del Bosque",
-        image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop"
-    },
-    {
-        id: 2,
-        title: "Edificio Horizonte",
-        image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop"
-    },
-    {
-        id: 3,
-        title: "Pabellón Solar",
-        image: "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?q=80&w=2071&auto=format&fit=crop"
-    },
-    {
-        id: 4,
-        title: "Loft Industrial",
-        image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=2053&auto=format&fit=crop"
-    },
-];
+import { projects } from '../data/projects';
+
+const featuredProjects = projects.slice(0, 4);
 
 const FeaturedCarousel = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -81,7 +62,7 @@ const FeaturedCarousel = () => {
                                 whileHover={{ scale: 0.98 }}
                                 transition={{ duration: 0.3 }}
                             >
-                                <div className="relative aspect-[4/3] overflow-hidden bg-gray-100 group cursor-pointer">
+                                <Link to={`/proyectos/${project.id}`} className="relative aspect-[4/3] overflow-hidden bg-gray-100 group cursor-pointer block">
                                     <img
                                         src={project.image}
                                         alt={project.title}
@@ -93,7 +74,7 @@ const FeaturedCarousel = () => {
                                             {project.title}
                                         </h3>
                                     </div>
-                                </div>
+                                </Link>
                             </motion.div>
                         ))}
                     </div>

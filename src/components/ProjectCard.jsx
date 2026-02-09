@@ -1,9 +1,9 @@
-import React from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const ProjectCard = ({ project }) => {
     return (
-        <div className="relative group cursor-pointer overflow-hidden aspect-[4/3] bg-gray-100">
+        <Link to={`/proyectos/${project.id}`} className="relative group cursor-pointer overflow-hidden aspect-[4/3] bg-gray-100 block">
             <img
                 src={project.image}
                 alt={project.title}
@@ -12,13 +12,9 @@ const ProjectCard = ({ project }) => {
             <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
                 <motion.div
                     initial={{ y: 20, opacity: 0 }}
-                    whileInView={{ y: 0, opacity: 1 }} // animate when in view? locally it's hover
-                    // actually for hover effect in framer motion inside a group, we can use variants but CSS group-hover is easier for simple opacity.
-                    // Let's use simple CSS for the container and maybe motion for the text entry on hover?
-                    // Simpler: Just CSS transition for opacity, text slightly moves up.
+                    whileInView={{ y: 0, opacity: 1 }}
                     className="text-center"
                 >
-                    {/* We can use motion here if we want the text to animate in on hover */}
                     <h3 className="text-white text-xl font-light tracking-widest uppercase translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                         {project.title}
                     </h3>
@@ -27,7 +23,7 @@ const ProjectCard = ({ project }) => {
                     </p>
                 </motion.div>
             </div>
-        </div>
+        </Link>
     );
 };
 
